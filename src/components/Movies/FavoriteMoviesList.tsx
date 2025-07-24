@@ -31,7 +31,7 @@ const FavoriteMoviesList: React.FC<FavoriteMoviesListProps> = ({ favorites }) =>
   } else if (favorites.favoritesMovies.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-60 py-10">
-        <p className="text-lg text-gray-500">У вас нет избранных фильмов</p>
+        <p className="text-lg text-gray-500">Вы не выбрали еду для заказа</p>
       </div>
     );
   } else {

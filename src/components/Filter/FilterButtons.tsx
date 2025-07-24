@@ -24,7 +24,7 @@ function FilterButtons() {
               : 'bg-white text-gray-800 border-gray-300 hover:bg-blue-50 hover:border-blue-400'
           }
           text-sm md:text-base font-semibold`}>
-        All
+        Все
       </button>
 
       {filmsCategory.map((value: string, index: number) => (

@@ -25,25 +25,21 @@ function MoviesList() {
   };
 
   return (
-    <section
-      id="movies"
-      className="
-        min-h-screen w-full flex flex-col items-center justify-start
-        px-2 sm:px-4 md:px-8 lg:px-16 py-8
-        transition-all duration-300
-      ">
+    <section id="movies" className="w-full min-h-screen">
       <div
         className="
-          w-full max-w-7xl
-          rounded-3xl shadow-2xl
-          p-4 sm:p-8
-          border border-white/10
-          flex flex-col gap-6
-          transition-all duration-300
+           w-full sm:max-w-7xl
+      rounded-none sm:rounded-3xl
+      shadow-none sm:shadow-2xl
+      p-0 sm:p-8
+      border-0 sm:border border-white/10
+      flex flex-col gap-6
+      transition-all duration-300
+      mx-auto
         ">
         <header className="mb-4">
           <h1 className="text-2xl sm:text-3xl font-bold text-dark tracking-tight drop-shadow-lg">
-            {path.pathname === '/favorites' ? 'Избранные фильмы' : 'Фильмы'}
+            {path.pathname === '/favorites' ? 'Корзина' : 'Еды и напитки'}
           </h1>
         </header>
         {path.pathname === '/favorites' ? (

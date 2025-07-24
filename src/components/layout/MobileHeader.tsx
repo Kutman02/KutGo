@@ -6,10 +6,10 @@ export default function MobileTabbar() {
 
   const navItems = [
     { to: '/', icon: <Home size={22} />, label: 'Главная', match: '/' },
-    { to: '/movies', icon: <Film size={22} />, label: 'Фильмы', match: '/movie' },
-    { to: '/favorites', icon: <Heart size={22} />, label: 'Мой список', match: '/favorites' },
+    { to: '/movies', icon: <Film size={22} />, label: 'Меню', match: '/movie' },
+    { to: '/favorites', icon: <Heart size={22} />, label: 'Корзина', match: '/favorites' },
     { to: '/faq', icon: <HelpCircle size={22} />, label: 'Вопросы', match: '/faq' },
-    { to: '/account', icon: <User size={22} />, label: 'Аккаунт', match: '/account' },
+    //{ to: '/account', icon: <User size={22} />, label: 'Аккаунт', match: '/account' },
   ];
 
   return (

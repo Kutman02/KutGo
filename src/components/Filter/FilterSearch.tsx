@@ -21,7 +21,7 @@ function FilterSearch() {
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Поиск фильмов..."
+        placeholder="Поиск по названию"
         className="flex-1 bg-transparent outline-none text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 py-2 px-2"
       />
       <button

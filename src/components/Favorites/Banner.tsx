@@ -1,4 +1,4 @@
-import background from '../../assets/Blade Runner 2049(2).jpg';
+import background from '../../assets/videos/kutgobannervideo.mp4';
 
 function Banner() {
   return (

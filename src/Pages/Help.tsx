@@ -54,15 +54,6 @@ function Help() {
           </form>
         )}
         <div className="mt-8 w-full border-t pt-6 text-center text-gray-500 text-sm">
-          <div>
-            <span className="font-semibold text-gray-700">Часто задаваемые вопросы:</span>
-            <ul className="mt-2 space-y-1 text-left mx-auto max-w-md">
-              <li>• Как восстановить доступ к аккаунту?</li>
-              <li>• Как изменить email или пароль?</li>
-              <li>• Как удалить свой аккаунт?</li>
-              <li>• Не пришло письмо с подтверждением</li>
-            </ul>
-          </div>
           <div className="mt-4">
             <span>Или напишите нам напрямую: </span>
             <a href="mailto:support@kutmovies.com" className="text-blue-600 hover:underline">
