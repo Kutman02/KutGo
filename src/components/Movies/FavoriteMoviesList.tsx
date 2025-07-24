@@ -40,6 +40,22 @@ const FavoriteMoviesList: React.FC<FavoriteMoviesListProps> = ({ favorites }) =>
 
   return (
     <div className="w-full px-2 py-6 bg-gradient-to-br from-slate-50 via-white to-slate-100 min-h-[60vh]">
+      {/* Вставляем блок уведомления, если есть избранные блюда */}
+      {moviesToShow.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-lg font-semibold text-green-800 flex items-center gap-1">
+            Готово к заказу — нажмите ‘Оформить
+            <span className="inline-flex items-center justify-center">
+              <span className="dot-flash w-1.5 h-1.5 bg-green-500 rounded-full mx-0.5 animate-bounce"></span>
+              <span className="dot-flash w-1.5 h-1.5 bg-green-500 rounded-full mx-0.5 animate-bounce delay-100"></span>
+              <span className="dot-flash w-1.5 h-1.5 bg-green-500 rounded-full mx-0.5 animate-bounce delay-200"></span>
+            </span>
+          </h2>
+          <p className="text-sm text-gray-600">Вы выбрали {moviesToShow.length} позиций в заказе</p>
+        </div>
+      )}
+
+      {/* Сетка карточек */}
       <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {moviesToShow.map((value) => (
           <div

@@ -1,9 +1,5 @@
-//import Banner from '../components/Favorites/Banner';
-import FavoriteList from '../components/Favorites/FavoriteList';
 import Filter from '../components/Filter/Filter';
 import MoviesList from '../components/Movies/MoviesList';
-import MoviesScroll from '../components/Movies/MoviesScroll';
-import FavoriteListRec from '../components/Favorites/MovieListRec';
 
 function Favorites() {
   return (
@@ -21,11 +17,6 @@ function Favorites() {
           <div className="w-full">
             <MoviesList />
           </div>
-        </div>
-
-        <div className="mt-16">
-          <h2 className="text-2xl font-semibold mb-6 text-gray-800">Напитки и закуски</h2>
-          <MoviesScroll />
         </div>
       </div>
     </>
