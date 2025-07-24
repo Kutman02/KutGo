@@ -40,7 +40,7 @@ const FavoriteMoviesList: React.FC<FavoriteMoviesListProps> = ({ favorites }) =>
 
   return (
     <div className="w-full px-2 py-6 bg-gradient-to-br from-slate-50 via-white to-slate-100 min-h-[60vh]">
-      <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {moviesToShow.map((value) => (
           <div
             key={value.id}

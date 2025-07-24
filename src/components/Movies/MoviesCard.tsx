@@ -29,11 +29,7 @@ function MoviesCard(props: MoviesCardProps) {
         <div className="absolute top-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
           {categoryPlus}
         </div>
-        <div className="absolute top-2 right-2 flex gap-1">
-          {[...Array(5)].map((_, i) => (
-            <FaStar key={i} className="w-6 h-6 text-yellow-500" />
-          ))}
-        </div>
+      
       </div>
       <div className="flex flex-col gap-1 p-4">
         <p className="text-lg font-semibold text-gray-900 dark:text-white truncate">

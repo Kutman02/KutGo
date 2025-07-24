@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaHeart } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 import { FcFilmReel } from 'react-icons/fc';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
@@ -48,9 +48,12 @@ export default function Header() {
           <div className="flex items-center gap-6">
             <Link
               to="/favorites"
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500 hover:bg-indigo-600 transition-all cursor-pointer select-none shadow-lg border-2 border-indigo-700">
-              <FaHeart className="w-6 h-6" title="избранное" />
-              <span className="text-white font-bold text-base drop-shadow">{favoritesCount}</span>
+              className="flex items-center gap-2 px-4 py-2 rounded-full 
+             bg-yellow-400 hover:bg-yellow-500 text-gray-900
+             transition-all duration-200 shadow-md border-2 border-yellow-600
+             active:scale-95">
+              <FaShoppingCart className="w-5 h-5 text-gray-800" title="Избранное" />
+              <span className="font-semibold text-base">{favoritesCount}</span>
             </Link>
 
             {/*<Link
