@@ -45,8 +45,12 @@ const favoritesSlice = createSlice({
       state.favoritesMovies = state.favoritesMovies.filter((movie) => movie.id !== dataFilm.id);
       localStorage.setItem('favoritesMovies', JSON.stringify(state.favoritesMovies));
     },
+    clearFavorites: (state) => {
+      state.favoritesMovies = [];
+      localStorage.removeItem('favoritesMovies');
+    },
   },
 });
 
 export default favoritesSlice.reducer;
-export const { addFavoritesMovie, removeFavoritesMovie } = favoritesSlice.actions;
+export const { addFavoritesMovie, removeFavoritesMovie, clearFavorites } = favoritesSlice.actions;
