@@ -1,7 +1,7 @@
 import React from 'react';
 import MoviesCard from './MoviesCard';
 
-// Тип одного фильма (должен соответствовать пропсам, которые ожидает MoviesCard)
+// Тип одного фильма/еды
 interface Movie {
   id: string;
   title: string;
@@ -9,7 +9,7 @@ interface Movie {
   categoryes: string[];
 }
 
-// Тип пропсов компонента MoviesCards
+// Тип пропсов
 interface MoviesCardsProps {
   films: {
     filteredMovies: Movie[];
@@ -30,8 +30,14 @@ const MoviesCards: React.FC<MoviesCardsProps> = ({ films }) => {
   }
 
   return (
-    <div className="w-full px-4 py-8">
-      <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+    <div className="w-full px-2 sm:px-4 py-6">
+      {/* Заголовок как в Яндекс.Еде */}
+      <h2 className="text-lg font-semibold mb-4 text-gray-800">
+        Рекомендуем 🍕
+      </h2>
+
+      {/* Сетка карточек ― на мобилке 2, на десктопе 4 */}
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {moviesToShow.map((value: Movie) => (
           <MoviesCard key={value.id} {...value} />
         ))}

@@ -8,7 +8,7 @@ import Favorites from './Pages/Favorites';
 import Error from './Pages/404';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchMovies } from './redux/slices/moviesSlice';
+import { fetchAllMovies } from './redux/slices/moviesSlice';
 import { useAppDispatch } from './redux/hooks';
 import MobileHeader from './components/layout/MobileHeader';
 import Movies from './Pages/Movies';
@@ -20,7 +20,7 @@ function AppMain() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchMovies());
+    dispatch(fetchAllMovies());
   }, []);
 
   return (

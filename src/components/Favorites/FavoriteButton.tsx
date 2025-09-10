@@ -2,53 +2,66 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { addFavoritesMovie, removeFavoritesMovie } from '../../redux/slices/favoritesSlice';
-import { FaShoppingCart } from 'react-icons/fa';
-
-interface FilmInfo {
-  id: string;
-  title: string;
-  description?: string;
-  categoryes: number | string[];
-}
+import { FaMinus, FaPlus, FaShoppingCart } from 'react-icons/fa';
+import { Film } from '../../redux/slices/favoritesSlice';
 
 interface FavoriteButtonProps {
-  film: FilmInfo;
+  film: Film;
 }
 
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({ film }) => {
   const dispatch = useDispatch();
   const favorites = useSelector((state: RootState) => state.favorites.favoritesMovies);
-  const isFavorite = favorites.some((movie) => movie.id === film.id);
+  const existing = favorites.find((movie) => movie.id === film.id);
+  const count = existing?.count ?? 0;
 
-  const toggleFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    dispatch(addFavoritesMovie({ ...film, description: film.description ?? '' }));
+  };
+
+  const handleRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     e.preventDefault();
 
-    const filmWithDescription = {
-      ...film,
-      description: film.description ?? '', // подставляем пустую строку, если undefined
-    };
-
-    if (isFavorite) {
-      dispatch(removeFavoritesMovie(filmWithDescription));
-    } else {
-      dispatch(addFavoritesMovie(filmWithDescription));
+    if (count === 1) {
+      const confirmed = window.confirm('Вы точно хотите убрать товар?');
+      if (!confirmed) return;
     }
+
+    dispatch(removeFavoritesMovie({ ...film, description: film.description ?? '' }));
   };
+
+  if (count > 0) {
+    return (
+      <div className="flex items-center gap-2">
+        <button
+          onClick={handleRemove}
+          className="px-2 py-1 bg-red-100 text-red-600 rounded-full hover:bg-red-200"
+        >
+          <FaMinus size={14} />
+        </button>
+        <span className="text-sm font-medium">{count}</span>
+        <button
+          onClick={handleAdd}
+          className="px-2 py-1 bg-green-100 text-green-600 rounded-full hover:bg-green-200"
+        >
+          <FaPlus size={14} />
+        </button>
+      </div>
+    );
+  }
 
   return (
     <button
-      onClick={toggleFavorite}
-      className={`flex items-center gap-2 px-3 py-2 rounded-full 
-        transition-transform duration-200
-        ${isFavorite ? 'text-red-600 bg-red-100' : 'text-gray-600 bg-gray-100'}
-        hover:scale-105 hover:shadow-md`}
-      title={isFavorite ? 'Убрать из корзины' : 'Добавить в корзину'}
-      type="button">
-      <FaShoppingCart size={20} />
-      <span className="text-sm font-medium">
-        {isFavorite ? 'Убрать из корзины' : 'Добавить в корзину'}
-      </span>
+      onClick={handleAdd}
+      className="flex items-center gap-2 px-3 py-2 rounded-full bg-gray-100 text-gray-600 
+                 hover:bg-orange-500 hover:text-white transition"
+      type="button"
+    >
+      <FaShoppingCart size={18} />
+      <span className="text-sm font-medium">Добавить</span>
     </button>
   );
 };

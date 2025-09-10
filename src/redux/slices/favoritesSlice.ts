@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Film {
+export interface Film {
   id: string | number;
-  title?: string;
-  category?: string[];
-  description: string;
-  categoryes: string[] | number;
-  aboutInfo?: string[]; // ← сделай опциональным
-  trailerUrl?: string; // ← сделай опциональным
+  title: string; // лучше всегда обязателен
+  description: string; // всегда строка
+  categoryes: string[]; // массив строк
   imageUrl?: string;
+  category?: string[];
+  aboutInfo?: string[];
+  trailerUrl?: string;
+  count?: number; // количество для корзины
 }
 
 interface FavoritesState {
@@ -18,8 +19,7 @@ interface FavoritesState {
 
 function loadFavoritesMovies(): Film[] {
   const dataLocal = localStorage.getItem('favoritesMovies');
-  const parseData = dataLocal ? JSON.parse(dataLocal) : [];
-  return parseData;
+  return dataLocal ? JSON.parse(dataLocal) : [];
 }
 
 const initialState: FavoritesState = {
@@ -32,17 +32,27 @@ const favoritesSlice = createSlice({
   initialState,
   reducers: {
     addFavoritesMovie: (state, action: PayloadAction<Film>) => {
-      const dataFilm = action.payload;
-      const isAlreadyFavorite = state.favoritesMovies.some((movie) => movie.id === dataFilm.id);
+      const existing = state.favoritesMovies.find((m) => m.id === action.payload.id);
 
-      if (!isAlreadyFavorite) {
-        state.favoritesMovies.push(dataFilm);
-        localStorage.setItem('favoritesMovies', JSON.stringify(state.favoritesMovies));
+      if (existing) {
+        existing.count = (existing.count ?? 1) + 1;
+      } else {
+        state.favoritesMovies.push({ ...action.payload, count: 1 });
       }
+
+      localStorage.setItem('favoritesMovies', JSON.stringify(state.favoritesMovies));
     },
     removeFavoritesMovie: (state, action: PayloadAction<Film>) => {
-      const dataFilm = action.payload;
-      state.favoritesMovies = state.favoritesMovies.filter((movie) => movie.id !== dataFilm.id);
+      const existing = state.favoritesMovies.find((m) => m.id === action.payload.id);
+
+      if (existing) {
+        if ((existing.count ?? 1) > 1) {
+          existing.count!--;
+        } else {
+          state.favoritesMovies = state.favoritesMovies.filter((m) => m.id !== action.payload.id);
+        }
+      }
+
       localStorage.setItem('favoritesMovies', JSON.stringify(state.favoritesMovies));
     },
     clearFavorites: (state) => {

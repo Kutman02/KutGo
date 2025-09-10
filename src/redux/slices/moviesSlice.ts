@@ -2,21 +2,8 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { Film } from '../../types/film';
 
-// Опиши типы для фильма и состояния
-
-//interface Film {
-//  id: string;
-//  title: string;
-//  category: string[];
-//  description: string;
-//  categoryes: string[];
-//  aboutInfo: string[];
-//  trailerUrl: string;
-//  imageUrl?: string;
-//}
-
 interface SearchFilmState {
-  film: Film | null; // film может быть объектом или null
+  film: Film | null;
   status: 'loading' | 'fulfilled' | 'error';
   error: string | null;
 }
@@ -31,7 +18,6 @@ interface MoviesState {
   filteredMoviesCategoryes: Film[];
 }
 
-// Начальное состояние с типом
 const initialState: MoviesState = {
   films: [],
   filmsCategory: [],
@@ -46,18 +32,19 @@ const initialState: MoviesState = {
   filteredMoviesCategoryes: [],
 };
 
-// Асинхронный thunk с явным типом возвращаемого значения (Film[])
-export const fetchMovies = createAsyncThunk<Film[]>('movie/fetchmovies', async () => {
+export const fetchAllMovies = createAsyncThunk<Film[]>('movie/fetchAllMovies', async () => {
   try {
-    const response = await axios.get('https://67c56962c4649b9551b69643.mockapi.io/ReactCinema');
-    return response.data;
+    const urls = [
+      'http://localhost:3000/pizzas',
+      'http://localhost:3000/drinks',
+      'http://localhost:3000/shaurma',
+      'http://localhost:3000/sweets',
+    ];
+    const responses = await Promise.all(urls.map((url) => axios.get<Film[]>(url)));
+    return responses.flatMap((res) => res.data);
   } catch (error: any) {
-    let errorMessage = 'Unknown error';
-    if (error.response?.status === 500) {
-      errorMessage = 'непонятная ошибка на сервере';
-    }
     console.error(error);
-    throw new Error(errorMessage);
+    throw new Error('Ошибка при загрузке товаров');
   }
 });
 
@@ -66,44 +53,37 @@ const moviesSlice = createSlice({
   initialState,
   reducers: {
     searchFilmInState: (state, action: PayloadAction<{ id: string }>) => {
-      const { id } = action.payload;
-      const searchFilm = state.films.find((film) => film.id === id) || null;
+      const searchFilm = state.films.find((film) => film.id === action.payload.id) || null;
       state.searchFilm.film = searchFilm;
       state.searchFilm.status = 'fulfilled';
       state.searchFilm.error = null;
     },
     filterMovies: (state, action: PayloadAction<string>) => {
-      if (action.payload === '') {
-        state.filteredMovies = [];
-      } else {
-        const searchTerm = action.payload.toLowerCase();
-        state.filteredMovies = state.films.filter((movie) =>
-          movie.title.toLowerCase().includes(searchTerm),
-        );
+      if (!action.payload) state.filteredMovies = [];
+      else {
+        const term = action.payload.toLowerCase();
+        state.filteredMovies = state.films.filter((f) => f.title.toLowerCase().includes(term));
       }
     },
     searchCategoryesFilms: (state, action: PayloadAction<string>) => {
-      if (action.payload === 'All') {
-        state.filteredMoviesCategoryes = [];
-      } else {
-        const searchFilms = state.films.filter((value) => value.category.includes(action.payload));
-        state.filteredMoviesCategoryes = searchFilms;
-      }
+      if (action.payload === 'All') state.filteredMoviesCategoryes = [];
+      else state.filteredMoviesCategoryes = state.films.filter((f) =>
+        f.category.includes(action.payload)
+      );
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchMovies.pending, (state) => {
+      .addCase(fetchAllMovies.pending, (state) => {
         state.status = 'loading';
         state.errors = null;
       })
-      .addCase(fetchMovies.fulfilled, (state, action: PayloadAction<Film[]>) => {
+      .addCase(fetchAllMovies.fulfilled, (state, action: PayloadAction<Film[]>) => {
         state.films = action.payload;
-        state.filmsCategory = [...new Set(action.payload.flatMap((value) => value.category))];
+        state.filmsCategory = [...new Set(action.payload.flatMap((f) => f.category))];
         state.status = 'fulfilled';
-        state.errors = null;
       })
-      .addCase(fetchMovies.rejected, (state, action) => {
+      .addCase(fetchAllMovies.rejected, (state, action) => {
         state.status = 'error';
         state.errors = action.error.message || 'Error';
       });
