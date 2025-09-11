@@ -5,7 +5,7 @@ export interface Film {
   title: string; // лучше всегда обязателен
   description: string; // всегда строка
   categoryes: string[]; // массив строк
-  imageUrl?: string;
+  imageUrl: string;
   category?: string[];
   aboutInfo?: string[];
   trailerUrl?: string;

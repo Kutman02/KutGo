@@ -42,11 +42,7 @@ function MoviesList() {
 
         {path.pathname === '/favorites' ? (
           <FavoriteMoviesList
-            favorites={{
-              favoritesMovies: normalizedData.favoritesMovies,
-              filteredMovies: normalizedData.filteredMovies,
-              filteredMoviesCategoryes: normalizedData.filteredMoviesCategoryes,
-            }}
+
           />
         ) : status === 'loading' ? (
           <div className="flex justify-center items-center min-h-[40vh]">

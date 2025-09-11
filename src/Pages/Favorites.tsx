@@ -22,16 +22,12 @@ function Favorites() {
           p-0 sm:p-6
           flex flex-col gap-4 sm:gap-6"
       >
-        <Filter />
+        
       </div>
 
       <div className="w-full">
         <FavoriteMoviesList
-          favorites={{
-            favoritesMovies: normalizeId(favoritesMovies),
-            filteredMovies: normalizeId(filteredMovies),
-            filteredMoviesCategoryes: normalizeId(filteredMoviesCategoryes),
-          }}
+          
         />
       </div>
     </div>

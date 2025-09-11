@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { searchCategoryesFilms } from '../../redux/slices/moviesSlice';
 
-const filterButtons = ['Пиццы', 'Напитки', 'Шаурма', 'Слыдости'];
+const filterButtons = ['Пиццы', 'Напитки', 'Шаурма', 'Сладости'];
 
 function FilterButtons() {
   const dispatch = useDispatch();

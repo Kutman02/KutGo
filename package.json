@@ -17,6 +17,7 @@
     "framer-motion": "^12.23.9",
     "lucide-react": "^0.523.0",
     "prop-types": "^15.8.1",
+    "qrcode": "^1.5.4",
     "react": "^19.0.0",
     "react-content-loader": "^7.0.2",
     "react-dom": "^19.0.0",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
+    "@types/qrcode": "^1.5.5",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/react-redux": "^7.1.34",
