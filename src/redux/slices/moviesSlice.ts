@@ -35,10 +35,10 @@ const initialState: MoviesState = {
 export const fetchAllMovies = createAsyncThunk<Film[]>('movie/fetchAllMovies', async () => {
   try {
     const urls = [
-      'http://localhost:3000/pizzas',
-      'http://localhost:3000/drinks',
-      'http://localhost:3000/shaurma',
-      'http://localhost:3000/sweets',
+      'https://react-pizza-v2-vite-back.vercel.app/pizzas',
+      'https://react-pizza-v2-vite-back.vercel.app/drinks',
+      'https://react-pizza-v2-vite-back.vercel.app/shaurma',
+      'https://react-pizza-v2-vite-back.vercel.app/sweets',
     ];
     const responses = await Promise.all(urls.map((url) => axios.get<Film[]>(url)));
     return responses.flatMap((res) => res.data);
