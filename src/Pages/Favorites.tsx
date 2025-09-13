@@ -6,8 +6,8 @@ import { RootState } from '../redux/store';
 
 function Favorites() {
   const { favoritesMovies } = useSelector((state: RootState) => state.favorites);
-  const { filteredMovies, filteredMoviesCategoryes } = useSelector(
-    (state: RootState) => state.movies
+  const { filteredDishes, filteredByCategory } = useSelector(
+    (state: RootState) => state.menu
   );
 
   // Нормализуем id, чтобы были строки

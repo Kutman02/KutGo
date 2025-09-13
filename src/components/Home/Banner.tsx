@@ -2,38 +2,32 @@ import video from '../../assets/videos/kutgobannervideo.mp4';
 import { Link } from 'react-router-dom';
 function Banner() {
   return (
-    <section className="relative h-[500px] sm:h-[600px] bg-black overflow-hidden rounded-xl shadow-xl">
-      {/* Видеофон */}
-      <video
-        className="absolute top-0 left-0 w-full h-full object-cover z-0"
-        autoPlay
-        muted
-        loop
-        playsInline>
-        <source src={video} type="video/mp4" />
-      </video>
+   <section className="relative h-auto py-16 sm:py-24 px-4 bg-gradient-to-b from-indigo-600 to-purple-700 rounded-2xl shadow-xl text-center">
+  <div className="flex flex-col items-center">
+    <h1 className="text-white text-3xl sm:text-5xl font-bold">
+      KutGo
+    </h1>
+    <p className="mt-3 text-white/80 text-base sm:text-lg max-w-md">
+      Сервис доставки еды
+    </p>
 
-      {/* Затемнение видео */}
-      <div className="absolute inset-0 bg-black/50 z-10" />
+    <div className="mt-6 flex gap-3 flex-wrap justify-center">
+      <Link
+        to="/menu"
+        className="px-5 py-2.5 rounded-full bg-white text-indigo-700 font-medium text-sm sm:text-base shadow-md hover:bg-indigo-50 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-white/50"
+      >
+        Меню
+      </Link>
+      <Link
+        to="/basket"
+        className="px-5 py-2.5 rounded-full border border-white text-white font-medium text-sm sm:text-base shadow-md hover:bg-white hover:text-indigo-700 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-white/50"
+      >
+        Корзина
+      </Link>
+    </div>
+  </div>
+</section>
 
-      {/* Контент поверх видео */}
-      <div className="relative z-20 flex flex-col justify-center items-center text-center h-full px-6">
-        <h1 className="text-white text-4xl sm:text-5xl font-bold">КutGo</h1>
-        <p className="mt-4 text-white/80 text-lg max-w-2xl">Сервис доставки еды</p>
-        <div className="mt-8 flex gap-4 flex-wrap justify-center">
-          <Link
-            to="/movies"
-            className="px-8 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold text-lg shadow-lg hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-indigo-300">
-            Перейти к меню
-          </Link>
-          <Link
-            to="/favorites"
-            className="px-8 py-3 rounded-full bg-white bg-opacity-20 border border-white text-black font-semibold text-lg shadow-lg hover:bg-white hover:text-indigo-700 hover:border-indigo-700 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-indigo-300">
-            Корзина
-          </Link>
-        </div>
-      </div>
-    </section>
   );
 }
 

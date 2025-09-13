@@ -30,8 +30,8 @@ export default function Header() {
           <nav className="flex gap-12 items-center">
             {[
               ['/', 'Главная'],
-              ['/movies', 'Меню'],
-              ['/favorites', 'Корзина'],
+              ['/menu', 'Меню'],
+              ['/basket', 'Корзина'],
               ['/faq', 'Вопросы'],
               ['/help', 'Поддержка'],
             ].map(([href, label]) => (
@@ -47,7 +47,7 @@ export default function Header() {
           {/* Действия */}
           <div className="flex items-center gap-6">
             <Link
-              to="/favorites"
+              to="/basket"
               className="flex items-center gap-2 px-4 py-2 rounded-full 
              bg-yellow-400 hover:bg-yellow-500 text-gray-900
              transition-all duration-200 shadow-md border-2 border-yellow-600

@@ -9,18 +9,35 @@ import { useLocation } from 'react-router-dom';
 function MoviesList() {
   const path = useLocation();
 
-  const { films, status, filteredMovies, filteredMoviesCategoryes } = useSelector(
-    (store: RootState) => store.movies,
+  const { dishes, status, filteredDishes } = useSelector(
+    (store: RootState) => store.menu,
   );
 
   const { favoritesMovies } = useSelector((store: RootState) => store.favorites);
 
-  const normalizeId = (arr: any[]) => arr.map((film) => ({ ...film, id: String(film.id) }));
+  const normalizeId = (arr: any[]) => 
+    Array.isArray(arr) ? arr.map((item) => ({ 
+      ...item, 
+      id: String(item.id),
+      imageUrl: item.imageUrl || '/placeholder.png',
+      types: item.types || [0],
+      sizes: item.sizes || [26],
+      price: item.price || 0,
+      rating: item.rating || 0
+    })) : [];
 
   const normalizedData = {
-    films: normalizeId(films),
-    filteredMovies: normalizeId(filteredMovies),
-    filteredMoviesCategoryes: normalizeId(filteredMoviesCategoryes),
+    films: Object.values(dishes).flat().map(dish => ({ 
+      ...dish, 
+      id: String(dish.id),
+      imageUrl: dish.imageUrl || '/placeholder.png',
+      types: dish.types || [0],
+      sizes: dish.sizes || [26],
+      price: dish.price || 0,
+      rating: dish.rating || 0
+    })),
+    filteredMovies: normalizeId(filteredDishes || []),
+    filteredMoviesCategoryes: normalizeId(filteredDishes || []),
     favoritesMovies: normalizeId(favoritesMovies),
   };
 
@@ -43,13 +60,13 @@ function MoviesList() {
         ">
         <header className="mb-4">
           <h1 className="text-2xl sm:text-3xl font-bold text-dark tracking-tight drop-shadow-lg">
-            {path.pathname === '/favorites' ? 'Рекомендации' : 'Фильмы'}
+            {path.pathname === '/basket' ? 'Рекомендации' : 'Фильмы'}
           </h1>
         </header>
-        {path.pathname === '/favorites' ? (
-          <FavoriteMoviesList
-            favorites={{
-              favoritesMovies: normalizedData.favoritesMovies,
+        {path.pathname === '/basket' ? (
+          <MoviesCards
+            films={{
+              films: normalizedData.favoritesMovies,
               filteredMovies: normalizedData.filteredMovies,
               filteredMoviesCategoryes: normalizedData.filteredMoviesCategoryes,
             }}

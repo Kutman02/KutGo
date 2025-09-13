@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux';
-import { filterMovies } from '../../redux/slices/moviesSlice';
+import { filterDishesByName } from '../../redux/slices/menuSlice';
 
 function FilterSearch() {
   const dispatch = useDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(filterMovies(e.target.value));
+    dispatch(filterDishesByName(e.target.value));
   };
 
   return (

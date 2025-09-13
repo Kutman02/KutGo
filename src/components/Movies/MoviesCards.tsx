@@ -7,6 +7,11 @@ interface Movie {
   title: string;
   imageUrl: string;
   categoryes: string[];
+  price: number;
+  types: number[];
+  sizes: number[];
+  rating: number;
+  description: string;
 }
 
 // Тип пропсов
@@ -31,10 +36,7 @@ const MoviesCards: React.FC<MoviesCardsProps> = ({ films }) => {
 
   return (
     <div className="w-full px-2 sm:px-4 py-6">
-      {/* Заголовок как в Яндекс.Еде */}
-      <h2 className="text-lg font-semibold mb-4 text-gray-800">
-        Рекомендуем 🍕
-      </h2>
+ 
 
       {/* Сетка карточек ― на мобилке 2, на десктопе 4 */}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

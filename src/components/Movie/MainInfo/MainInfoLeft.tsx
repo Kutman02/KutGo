@@ -8,6 +8,9 @@ interface FilmInfo {
   title: string;
   description: string;
   categoryes: string[];
+  imageUrl: string   
+  
+
 }
 
 interface MainInfoLeftProps {

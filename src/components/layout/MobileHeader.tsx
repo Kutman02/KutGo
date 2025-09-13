@@ -10,12 +10,12 @@ export default function MobileTabbar() {
 
   const navItems = [
     { to: '/', icon: <Home size={22} />, label: 'Главная', match: '/' },
-    { to: '/movies', icon: <ForkKnife size={22} />, label: 'Меню', match: '/movie' },
+    { to: '/menu', icon: <ForkKnife size={22} />, label: 'Меню', match: '/movie' },
     {
-      to: '/favorites',
+      to: '/basket',
       icon: <ShoppingCart size={22} />,
       label: 'Корзина',
-      match: '/favorites',
+      match: '/basket',
       badge: favoritesCount,
     },
     { to: '/faq', icon: <HelpCircle size={22} />, label: 'Вопросы', match: '/faq' },

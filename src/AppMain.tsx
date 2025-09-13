@@ -8,7 +8,7 @@ import Favorites from './Pages/Favorites';
 import Error from './Pages/404';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchAllMovies } from './redux/slices/moviesSlice';
+import { fetchMenu } from './redux/slices/menuSlice';
 import { useAppDispatch } from './redux/hooks';
 import MobileHeader from './components/layout/MobileHeader';
 import Movies from './Pages/Movies';
@@ -20,7 +20,7 @@ function AppMain() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllMovies());
+    dispatch(fetchMenu());
   }, []);
 
   return (
@@ -31,9 +31,9 @@ function AppMain() {
         {/* Main content area */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/basket" element={<Favorites />} />
           <Route path="/movie/:id" element={<Movie />} />
-          <Route path="/movies" element={<Movies />} />
+          <Route path="/menu" element={<Movies />} />
           <Route path="/Faq" element={<Faq />} />
           <Route path="/help" element={<Help />} />
           <Route path="/account" element={<Account />} />

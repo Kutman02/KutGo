@@ -12,6 +12,9 @@ interface Movie {
   imageUrl: string;
   categoryes: string[];
   description?: string;
+  price?: number;
+  selectedSize?: number;
+  count?: number;
 }
 
 const QRCodeCanvas: React.FC<{ value: string }> = ({ value }) => {
@@ -33,7 +36,7 @@ const TIMER_DURATION = 30 * 60; // 30 минут
 const FavoriteMoviesList: React.FC = () => {
   const dispatch = useDispatch();
   const favoritesMovies = useSelector(
-    (state: RootState) => state.favorites.favoritesMovies
+    (state: RootState) => state.favorites.favoritesMovies as Movie[]
   );
 
   const [qrData, setQrData] = useState<string | null>(null);
@@ -97,9 +100,9 @@ const FavoriteMoviesList: React.FC = () => {
         const orderText = `Новый заказ:\n\n${favoritesMovies
           .map(
             (movie, index) =>
-              `${index + 1}. ${movie.title} — http://localhost:5173/movie/${movie.id}`
+              `${index + 1}). ${movie.count || 1} шт ${movie.title} (${movie.selectedSize}см) - ${movie.price} сом — http://localhost:5173/movie/${movie.id}`
           )
-          .join("\n")}\n\nМестоположение:\nGoogle Maps: ${mapsLink}\n2ГИС: ${dgisLink}`;
+          .join("\n")}\n\nОбщая сумма заказа: ${favoritesMovies.reduce((sum, movie) => sum + ((movie.price || 0) * (movie.count || 1)), 0)} ₽\n\nМестоположение:\nGoogle Maps: ${mapsLink}\n2ГИС: ${dgisLink}`;
 
         const encodedText = encodeURIComponent(orderText);
         const phoneNumber = "996774522640";
@@ -150,7 +153,10 @@ const FavoriteMoviesList: React.FC = () => {
             Готово к заказу
           </h2>
           <p className="text-xs sm:text-sm text-gray-600">
-            В корзине <span className="font-medium">{favoritesMovies.length}</span> блюд
+            В корзине <span className="font-medium">{favoritesMovies.length}</span> блюд на сумму{' '}
+            <span className="font-medium text-yellow-600">
+              {favoritesMovies.reduce((sum, movie) => sum + ((movie.price || 0) * (movie.count || 1)), 0)} ₽
+            </span>
           </p>
         </div>
         <div className="flex items-center gap-2">

@@ -1,18 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import movies from './slices/moviesSlice';
-import favorites from './slices/favoritesSlice';
+import menuReducer from './slices/menuSlice';
+import favoritesReducer from './slices/favoritesSlice';
 
 const store = configureStore({
   reducer: {
-    movies,
-    favorites,
+    menu: menuReducer,        // <-- теперь ключ 'menu'
+    favorites: favoritesReducer,
   },
 });
-//Добавил store для redu
-// Тип RootState — вся структура состояния Redux
-export type RootState = ReturnType<typeof store.getState>;
 
-// Тип AppDispatch — тип dispatch
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export default store;

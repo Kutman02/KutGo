@@ -1,4 +1,3 @@
-import FilterButtons from './FilterButtons';
 import FilterCategoryes from './FilterCategoryes';
 import FilterSearch from './FilterSearch';
 
@@ -8,7 +7,6 @@ function Filter() {
       <div className="flex flex-col gap-4">
         <FilterSearch />
         <FilterCategoryes />
-        <FilterButtons />
       </div>
     </section>
   );
