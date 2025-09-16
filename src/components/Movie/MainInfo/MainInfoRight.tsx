@@ -26,7 +26,7 @@ function MainInfoRight({ filmInfo }: MainInfoRightProps) {
           <div className="flex justify-between items-center">
             <span className="text-sm text-gray-500 dark:text-gray-400">Цена:</span>
             <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
-              {dataFilm.price} ₽
+              {dataFilm.price} сом
             </span>
           </div>
 

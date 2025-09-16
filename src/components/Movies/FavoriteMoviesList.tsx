@@ -66,7 +66,7 @@ const FavoriteMoviesList: React.FC = () => {
             (movie, index) =>
               `${index + 1}). ${movie.count || 1} шт ${movie.title} (${movie.selectedSize}см) - ${movie.price} сом — http://localhost:5173/movie/${movie.id}`
           )
-          .join("\n")}\n\nОбщая сумма заказа: ${favoritesMovies.reduce((sum, movie) => sum + ((movie.price || 0) * (movie.count || 1)), 0)} ₽\n\nМестоположение:\nGoogle Maps: ${mapsLink}\n2ГИС: ${dgisLink}`;
+          .join("\n")}\n\nОбщая сумма заказа: ${favoritesMovies.reduce((sum, movie) => sum + ((movie.price || 0) * (movie.count || 1)), 0)} сом\n\nМестоположение:\nGoogle Maps: ${mapsLink}\n2ГИС: ${dgisLink}`;
 
         const encodedText = encodeURIComponent(orderText);
         const phoneNumber = "996774522640";
@@ -114,7 +114,7 @@ const FavoriteMoviesList: React.FC = () => {
           <p className="text-xs sm:text-sm text-gray-600">
             В корзине <span className="font-medium">{favoritesMovies.length}</span> блюд на сумму{' '}
             <span className="font-medium text-yellow-600">
-              {favoritesMovies.reduce((sum, movie) => sum + ((movie.price || 0) * (movie.count || 1)), 0)} ₽
+              {favoritesMovies.reduce((sum, movie) => sum + ((movie.price || 0) * (movie.count || 1)), 0)} сом
             </span>
           </p>
         </div>

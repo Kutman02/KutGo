@@ -22,7 +22,7 @@ export default function MobileTabbar() {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full z-50 md:hidden bg-white/80 backdrop-blur-md border-t border-gray-300 flex justify-around items-center py-3 shadow-lg">
+    <nav className="fixed bottom-0 left-0 w-full z-50 md:hidden bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border-t border-zinc-300 dark:border-zinc-800 flex justify-around items-center py-3 shadow-lg">
       {navItems.map(({ to, icon, label, match, badge }) => {
         const isActive = pathname === match || pathname.startsWith(match);
 
@@ -32,8 +32,8 @@ export default function MobileTabbar() {
             to={to}
             className={`relative flex flex-col items-center transition-all duration-300 select-none ${
               isActive
-                ? 'text-indigo-600 scale-110 font-semibold'
-                : 'text-gray-400 hover:text-indigo-500'
+                ? 'text-indigo-600 dark:text-indigo-400 scale-110 font-semibold'
+                : 'text-zinc-400 dark:text-zinc-500 hover:text-indigo-500 dark:hover:text-indigo-400'
             }`}>
             <div className="relative">
               {icon}

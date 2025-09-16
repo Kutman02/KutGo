@@ -92,7 +92,7 @@ const MoviesCard: React.FC<Movie> = ({
         </div>
 
         <div className="flex items-center justify-between mt-3">
-          <p className="text-lg font-bold bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent">{price} ₽</p>
+          <p className="text-lg font-bold bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent">{price} сом</p>
           <div className="flex items-center gap-1 bg-yellow-50 dark:bg-yellow-900/20 px-2 py-1 rounded-full">
             <span className="text-yellow-500">★</span>
             <span className="text-sm text-yellow-600 dark:text-yellow-400">{rating}</span>

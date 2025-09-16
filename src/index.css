@@ -1,5 +1,35 @@
 @import 'tailwindcss';
 
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply antialiased font-sans text-zinc-900 bg-gradient-to-br from-zinc-50 via-white to-zinc-100 dark:from-zinc-950 dark:via-zinc-900 dark:to-black dark:text-zinc-100;
+  }
+
+  /* Subtle grid background */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+    background-size: 12px 12px;
+    opacity: 0.35;
+    z-index: -1;
+  }
+}
+
 @keyframes dot-flash {
   0%,
   100% {

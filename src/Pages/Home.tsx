@@ -5,15 +5,18 @@ import Filter from '../components/Filter/Filter';
 function Home() {
   return (
     <>
-    <Filter />
-      <Banner />
-      <div className="w-full min-h-screen flex flex-col gap-8 px-4 sm:px-8 lg:px-16 py-8">
-        <div
-          className="  bg-transparent sm:bg-white
-    rounded-none sm:rounded-lg
-    shadow-none sm:shadow
-    p-0 sm:p-6
-    flex flex-col gap-4 sm:gap-6">
+      <div className="relative">
+        <div className="absolute inset-0 -z-10">
+          {/* Accent gradient blob */}
+          <div className="absolute right-[-15%] top-[-10%] h-[300px] w-[300px] md:h-[420px] md:w-[420px] rounded-full blur-3xl opacity-40 bg-gradient-to-br from-indigo-400 to-purple-400 dark:from-indigo-600 dark:to-purple-600" />
+        </div>
+      </div>
+      <div className="w-full min-h-screen flex flex-col gap-8 px-4 sm:px-8 lg:px-16 py-6 md:py-10">
+        <div className="bg-white/70 dark:bg-zinc-900/60 backdrop-blur-xl border border-zinc-200/70 dark:border-zinc-800 rounded-2xl shadow-sm p-4 md:p-6">
+          <Filter />
+        </div>
+        <Banner />
+        <div className="bg-white/70 dark:bg-zinc-900/60 backdrop-blur-xl border border-zinc-200/70 dark:border-zinc-800 rounded-2xl shadow-sm p-4 md:p-6 flex flex-col gap-6">
           <MoviesList />
         </div>
       </div>

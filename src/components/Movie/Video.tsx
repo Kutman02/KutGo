@@ -56,7 +56,7 @@ function Video() {
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <p className="text-xl font-bold text-gray-900 dark:text-white">{dish.price} ₽</p>
+              <p className="text-xl font-bold text-gray-900 dark:text-white">{dish.price} сом</p>
               <div className="flex items-center gap-1">
                 <span className="text-yellow-500">★</span>
                 <span className="text-gray-600 dark:text-gray-400">{dish.rating || 0}</span>
