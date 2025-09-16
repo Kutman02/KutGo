@@ -86,7 +86,7 @@ const MoviesCard: React.FC<Movie> = ({
                   : 'bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 hover:scale-105'
               }`}
             >
-              {size} см
+              {size}{categoryes && (categoryes.includes('Напитки') ? ' л' : categoryes.includes('Пицца') ? ' см' : '')}
             </button>
           ))}
         </div>

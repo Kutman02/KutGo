@@ -36,7 +36,7 @@ function MainInfoRight({ filmInfo }: MainInfoRightProps) {
               <div className="flex flex-wrap gap-2">
                 {dataFilm.sizes.map((size) => (
                   <span key={size} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm">
-                    {size} см
+                    {size}{dataFilm?.category && (dataFilm.category.includes('Напитки') ? ' л' : dataFilm.category.includes('Пицца') ? ' см' : '')}
                   </span>
                 ))}
               </div>

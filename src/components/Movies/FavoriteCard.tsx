@@ -10,6 +10,7 @@ interface FavoriteCardProps {
   count?: number;
   description?: string;
   className?: string;
+  category?: string[];
 }
 
 const FavoriteCard: React.FC<FavoriteCardProps> = ({
@@ -21,6 +22,7 @@ const FavoriteCard: React.FC<FavoriteCardProps> = ({
   count = 1,
   description,
   className = '',
+  category,
 }) => {
   return (
     <div className={`bg-white rounded-xl shadow-sm overflow-hidden flex ${className}`}>
@@ -40,13 +42,13 @@ const FavoriteCard: React.FC<FavoriteCardProps> = ({
             <p className="text-sm text-gray-600 mt-1 line-clamp-1">{description}</p>
           )}
           <div className="mt-2 flex items-center gap-2 text-sm text-gray-600">
-            <span>Размер: {selectedSize}см</span>
+            <span>Размер: {selectedSize}{Array.isArray(category) && (category.includes('Напитки') ? 'л' : category.includes('Пицца') ? 'см' : '')}</span>
             <span>•</span>
             <span>Кол-во: {count}</span>
           </div>
         </div>
         <div className="text-lg font-semibold text-gray-900 mt-2">
-          {price} ₽
+          {price} сом
         </div>
       </div>
     </div>

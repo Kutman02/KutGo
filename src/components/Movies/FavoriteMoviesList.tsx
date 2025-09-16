@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { clearFavorites } from "../../redux/slices/favoritesSlice";
 import {BanIcon} from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Movie {
   id: number;
@@ -31,8 +32,6 @@ const QRCodeCanvas: React.FC<{ value: string }> = ({ value }) => {
   return <canvas ref={canvasRef} className="mx-auto mt-3" />;
 };
 
-const TIMER_DURATION = 30 * 60; // 30 минут
-
 const FavoriteMoviesList: React.FC = () => {
   const dispatch = useDispatch();
   const favoritesMovies = useSelector(
@@ -40,48 +39,13 @@ const FavoriteMoviesList: React.FC = () => {
   );
 
   const [qrData, setQrData] = useState<string | null>(null);
-  const [timeLeft, setTimeLeft] = useState<number>(TIMER_DURATION);
   const [showConfirm, setShowConfirm] = useState(false); // ⬅️ состояние для модалки
 
   // Очистка корзины
   const handleClearCart = () => {
     dispatch(clearFavorites());
-    localStorage.removeItem("cartTimestamp");
-    setTimeLeft(TIMER_DURATION);
     setShowConfirm(false);
   };
-
-  // Таймер
-  useEffect(() => {
-    const saved = localStorage.getItem("cartTimestamp");
-    if (saved) {
-      const diff = Math.floor((Date.now() - Number(saved)) / 1000);
-      const remaining = TIMER_DURATION - diff;
-      if (remaining > 0) {
-        setTimeLeft(remaining);
-      } else {
-        handleClearCart();
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const saved = localStorage.getItem("cartTimestamp");
-      if (!saved) return;
-
-      const diff = Math.floor((Date.now() - Number(saved)) / 1000);
-      const remaining = TIMER_DURATION - diff;
-
-      if (remaining <= 0) {
-        handleClearCart();
-      } else {
-        setTimeLeft(remaining);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   // Заказ
   const handleOrder = () => {
@@ -119,17 +83,7 @@ const FavoriteMoviesList: React.FC = () => {
     );
   };
 
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60).toString().padStart(2, "0");
-    const s = (seconds % 60).toString().padStart(2, "0");
-    return `${m}:${s}`;
-  };
 
-  useEffect(() => {
-    if (favoritesMovies.length > 0 && !localStorage.getItem("cartTimestamp")) {
-      localStorage.setItem("cartTimestamp", Date.now().toString());
-    }
-  }, [favoritesMovies]);
 
   if (favoritesMovies.length === 0) {
     return (
@@ -141,6 +95,11 @@ const FavoriteMoviesList: React.FC = () => {
         <p className="text-xs sm:text-sm text-gray-500 mt-1 text-center">
           Добавьте понравившиеся позиции в корзину
         </p>
+        <Link to="/menu"
+          className="mt-4 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg transition-colors duration-200"
+        >
+          Перейти к меню
+        </Link>
       </div>
     );
   }
@@ -160,9 +119,6 @@ const FavoriteMoviesList: React.FC = () => {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-500">
-            Очистка через: {formatTime(timeLeft)}
-          </span>
           <button
             onClick={() => setShowConfirm(true)}
             className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-3 rounded-lg text-xs transition"
